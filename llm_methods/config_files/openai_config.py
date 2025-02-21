@@ -1,37 +1,16 @@
-import google.generativeai as genai
+from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
 
 load_dotenv()
 
+OPENAI_CLIENT = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+OPENAI_MODELS_DICT = {"gpt-4o": "gpt-4o-2024-08-06",
+                      "gpt-4-turbo": "gpt-4-turbo-2024-04-09",
+                      "gpt-4o-mini": "gpt-4o-mini-2024-07-18",
+                      "chatgpt-4o-latest": "chatgpt-4o-latest"}
 
-SAFETY_SETTINGS = [
-  {
-    "category": "HARM_CATEGORY_HARASSMENT",
-    "threshold": "BLOCK_NONE",
-  },
-  {
-    "category": "HARM_CATEGORY_HATE_SPEECH",
-    "threshold": "BLOCK_NONE",
-  },
-  {
-    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-    "threshold": "BLOCK_NONE",
-  },
-  {
-    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-    "threshold": "BLOCK_NONE",
-  },
-]
-
-GOOGLE_MODELS_DICT =  {"gemini-1.5-flash": "gemini-1.5-flash",
-                       "gemini-1.5-pro": "gemini-1.5-pro",
-                       "gemini-1.5-pro-experimental": "gemini-1.5-pro-exp-0827",
-                       "gemini-1.5-flash-experimental": "gemini-1.5-flash-exp-0827",
-                       "gemini-1.5-pro-002": "gemini-1.5-pro-002",
-                       "gemini-1.5-flash-002": "gemini-1.5-flash-002"}
-
-DIFFERENT_TOP_K_MODELS = ["gemini-1.5-pro-002", "gemini-1.5-flash-002"]
+OPENAI_EMBEDDING_MODELS_DICT = {"text-embedding-3-small": "text-embedding-3-small",
+                                "text-embedding-3-large": "text-embedding-3-large"}
